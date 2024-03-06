@@ -30,8 +30,8 @@ Output
 
 ```
 p := query.Players().
-		TeamID(1610612738).
-		OnlyAllStar(true)
+	TeamID(1610612738).
+	OnlyAllStar(true)
 
 _ := p.Execute()
 players := p.GetPlayers()
