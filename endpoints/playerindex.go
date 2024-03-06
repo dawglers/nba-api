@@ -8,8 +8,6 @@ import (
 
 type PlayerIndex struct {
 	Base
-
-	// players []player.Player
 }
 
 func NewPlayerIndex() *PlayerIndex {
