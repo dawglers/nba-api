@@ -26,12 +26,13 @@ Output
 &{1629498 Jackie Young jackie-young 1611661319 G 6-0 165 Notre Dame USA 2019: Rd 1, Pk 1 0}
 ```
 
-#### Example 2: Fetch all NBA All Stars playing for the Boston Celtics
+#### Example 2: Fetch all NBA Centers who were All Stars in the 1995-96 season
 
 ```
 p := query.Players().
-  TeamID(1610612738).
-  OnlyAllStar(true)
+  OnlyAllStar(true).
+  Position(player.Center).
+  Season(1996)
 
 _ := p.Execute()
 players := p.GetPlayers()
@@ -39,6 +40,10 @@ players := p.GetPlayers()
 
 Output
 ```
-&{1627759 Jaylen Brown jaylen-brown 1610612738  6-6 223 California USA 2016: Rd 1, Pk 3 7}
-&{1628369 Jayson Tatum jayson-tatum 1610612738  6-8 210 Duke USA 2017: Rd 1, Pk 3 0}
+&{121 Patrick Ewing patrick-ewing 1610612752 C 7-0 255 Georgetown Jamaica 1985: Rd 1, Pk 1 33}
+&{297 Alonzo Mourning alonzo-mourning 1610612748 C 6-10 261 Georgetown USA 1992: Rd 1, Pk 2 33}
+&{87 Dikembe Mutombo dikembe-mutombo 1610612743 C 7-2 260 Georgetown Congo 1991: Rd 1, Pk 4 55}
+&{406 Shaquille O'Neal shaquille-oneal 1610612753 C 7-1 325 Louisiana State USA 1992: Rd 1, Pk 1 32}
+&{165 Hakeem Olajuwon hakeem-olajuwon 1610612745 C 7-0 255 Houston Nigeria 1984: Rd 1, Pk 1 34}
+&{764 David Robinson david-robinson 1610612759 C 7-1 250 Navy USA 1987: Rd 1, Pk 1 50}
 ```

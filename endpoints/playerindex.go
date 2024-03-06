@@ -20,9 +20,9 @@ func NewPlayerIndex() *PlayerIndex {
 
 func (p *PlayerIndex) SetDefaultParams() {
 	p.Base.params = url.Values{}
-	p.Base.SetHistorical(false)
+	p.Base.SetHistorical(true)
 	p.Base.SetLeagueID(league.NBA)
-	p.Base.SetSeason(league.CurrentSeason)
+	p.Base.SetSeason(2024)
 	p.Base.SetOnlyActive(true)
 }
 

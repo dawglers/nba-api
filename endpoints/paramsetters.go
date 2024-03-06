@@ -28,7 +28,11 @@ func (b *Base) SetPosition(position player.Position) {
 }
 
 func (b *Base) SetSeason(season league.Season) {
-	b.params.Set("Season", string(season))
+	b.params.Set("Season", season.String())
+}
+
+func (b *Base) SetSeasonType(seasonType league.SeasonType) {
+	b.params.Set("SeasonType", string(seasonType))
 }
 
 func (b *Base) SetHistorical(includeHistorical bool) {

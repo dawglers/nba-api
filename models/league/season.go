@@ -1,7 +1,17 @@
 package league
 
-type Season string
+import "fmt"
+
+type Season int
+
+func (s Season) String() string {
+	return fmt.Sprintf("%d-%d", s-1, s%100)
+}
+
+type SeasonType string
 
 const (
-	CurrentSeason Season = "2023-24"
+	RegularSeason SeasonType = "Regular Season"
+	Preseason     SeasonType = "Pre Season"
+	Postseason    SeasonType = "Post Season"
 )
