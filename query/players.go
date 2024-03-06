@@ -32,8 +32,8 @@ func (p *playersBuilder) Season(season league.Season) *playersBuilder {
 	return p
 }
 
-func (p *playersBuilder) PlayerPosition(playerPosition player.Position) *playersBuilder {
-	p.endpoint.SetPlayerPosition(playerPosition)
+func (p *playersBuilder) Position(position player.Position) *playersBuilder {
+	p.endpoint.SetPosition(position)
 	return p
 }
 

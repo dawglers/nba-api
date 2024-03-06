@@ -11,7 +11,7 @@ Query all players
 p := query.Players().
   LeagueID(league.WNBA).
   TeamID(1611661319).
-  PlayerPosition(player.Guard)
+  Position(player.Guard)
 
 _ := p.Execute()
 players := p.GetPlayers()

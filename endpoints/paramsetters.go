@@ -23,8 +23,8 @@ func (b *Base) SetOnlyAllStar(onlyAllStar bool) {
 	b.params.Set("AllStar", strconv.Itoa(boolToInt(onlyAllStar)))
 }
 
-func (b *Base) SetPlayerPosition(playerPosition player.Position) {
-	b.params.Set("PlayerPosition", string(playerPosition))
+func (b *Base) SetPosition(position player.Position) {
+	b.params.Set("PlayerPosition", string(position))
 }
 
 func (b *Base) SetSeason(season league.Season) {
