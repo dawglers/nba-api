@@ -57,7 +57,7 @@ func (p *playersBuilder) Execute() error {
 	fieldNames := data.Headers
 
 	for _, playerData := range data.RowSet {
-		player := player.New(fieldNames, playerData)
+		player := player.NewPlayer(fieldNames, playerData)
 		p.players = append(p.players, player)
 	}
 

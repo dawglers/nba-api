@@ -19,7 +19,7 @@ type Player struct {
 	Jersey    string
 }
 
-func New(fieldNames []string, data []any) *Player {
+func NewPlayer(fieldNames []string, data []any) *Player {
 	player := &Player{}
 
 	for i, fieldName := range fieldNames {

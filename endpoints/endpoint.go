@@ -8,8 +8,9 @@ import (
 type Path string
 
 const (
-	UndefinedPath        = ""
-	PlayerIndexPath Path = "playerindex"
+	UndefinedPath           = ""
+	PlayerIndexPath    Path = "playerindex"
+	PlayerGameLogsPath Path = "playergamelogs"
 )
 
 type Endpoint interface {

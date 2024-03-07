@@ -43,6 +43,14 @@ func (b *Base) SetOnlyActive(onlyActive bool) {
 	b.params.Set("Active", strconv.Itoa(boolToInt(onlyActive)))
 }
 
+func (b *Base) SetLastNGames(lastNGames int) {
+	b.params.Set("LastNGames", strconv.Itoa(lastNGames))
+}
+
+func (b *Base) SetOpponentTeamID(opponentTeamID int) {
+	b.params.Set("OpponentTeamID", strconv.Itoa(opponentTeamID))
+}
+
 func boolToInt(b bool) int {
 	if b {
 		return 1
