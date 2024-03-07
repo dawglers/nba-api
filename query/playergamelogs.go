@@ -2,6 +2,7 @@ package query
 
 import (
 	endpoint "github.com/ndesai96/nba-api/endpoints"
+	"github.com/ndesai96/nba-api/models/league"
 	"github.com/ndesai96/nba-api/models/player"
 )
 
@@ -23,6 +24,11 @@ func (p *playerGameLogsBuilder) LastNGames(lastNGames int) *playerGameLogsBuilde
 
 func (p *playerGameLogsBuilder) OpponentTeamID(opponentTeamID int) *playerGameLogsBuilder {
 	p.endpoint.SetOpponentTeamID(opponentTeamID)
+	return p
+}
+
+func (p *playerGameLogsBuilder) Season(season league.Season) *playerGameLogsBuilder {
+	p.endpoint.SetSeason(season)
 	return p
 }
 

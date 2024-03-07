@@ -51,11 +51,13 @@ Output
 ### Player Game Logs
 Query game logs for a player
 
-#### Example 1: Fetch all game logs for Alperen Sengun against the San Antonio Spurs this season
+#### Example 1: Fetch all game logs for Alperen Sengun against the San Antonio Spurs in the 2023 season
 
 ```
-q := query.PlayerGameLogs(playerID).
-  OpponentTeamID(1610612759)
+q := query.PlayerGameLogs(1630578).
+  OpponentTeamID(1610612759).
+  Season(2023)
+
 
 _ := q.Execute()
 gameLogs := q.GetGameLogs()
@@ -63,15 +65,16 @@ gameLogs := q.GetGameLogs()
 
 Output
 ```
-&{1630578 0022300891 HOU vs. SAS 37 19 32 2 3 5 0 6 10 3 2 5 1 3 45 18 84}
-&{1630578 0022300298 HOU vs. SAS 30 6 12 1 1 2 0 2 7 4 6 2 1 3 15 10 34}
-&{1630578 0022300083 HOU @ SAS 41 11 18 1 3 2 0 6 8 7 6 2 1 6 25 -4 55}
+&{1630578 0022200967 HOU vs. SAS 27 6 9 0 0 3 0 3 11 3 1 3 1 2 15 22 47}
+&{1630578 0022200959 HOU @ SAS 28 6 9 1 2 3 0 5 5 4 4 1 0 4 16 10 33}
+&{1630578 0022200455 HOU vs. SAS 24 8 10 0 0 6 0 1 3 3 0 1 1 3 22 -16 37}
+&{1630578 0022200375 HOU @ SAS 29 8 17 0 0 0 0 7 4 2 3 0 0 3 16 -12 29}
 ```
 
 #### Example 2: Fetch last 10 game logs for Alperen Sengun
 
 ```
-q := query.PlayerGameLogs(playerID).
+q := query.PlayerGameLogs(1630578).
   LastNGames(10)
 
 _ := q.Execute()
