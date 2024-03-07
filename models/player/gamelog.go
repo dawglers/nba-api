@@ -3,14 +3,18 @@ package player
 import (
 	"math"
 	"regexp"
+	"time"
 
 	"github.com/ndesai96/nba-api/models/game"
 )
+
+const dateLayout = "2006-01-02T15:04:05"
 
 type GameLog struct {
 	PlayerID              int
 	GameID                string
 	Matchup               string
+	GameDate              time.Time
 	Minutes               int
 	FieldGoalMade         int
 	FieldGoalAttempted    int
@@ -52,6 +56,12 @@ func NewGameLog(fieldNames []string, data []any) *GameLog {
 			gameLog.PlayerID = int(data[i].(float64))
 		case "GAME_ID":
 			gameLog.GameID = data[i].(string)
+		case "GAME_DATE":
+			dateString := data[i].(string)
+			gameDate, err := time.Parse(dateLayout, dateString)
+			if err == nil {
+				gameLog.GameDate = gameDate
+			}
 		case "MATCHUP":
 			gameLog.Matchup = data[i].(string)
 		case "MIN":
