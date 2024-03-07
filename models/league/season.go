@@ -13,5 +13,5 @@ type SeasonType string
 const (
 	RegularSeason SeasonType = "Regular Season"
 	Preseason     SeasonType = "Pre Season"
-	Postseason    SeasonType = "Post Season"
+	Playoffs      SeasonType = "Playoffs"
 )
