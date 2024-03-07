@@ -1,8 +1,9 @@
 package endpoint
 
 type Results struct {
-	Resource   string      `json:"resource"`
-	ResultSets []ResultSet `json:"resultSets"`
+	Resource   string         `json:"resource"`
+	ResultSets []ResultSet    `json:"resultSets"`
+	Parameters map[string]any `json:"parameters"`
 }
 
 type ResultSet struct {
