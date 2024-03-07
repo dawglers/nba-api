@@ -47,3 +47,47 @@ Output
 &{165 Hakeem Olajuwon hakeem-olajuwon 1610612745 C 7-0 255 Houston Nigeria 1984: Rd 1, Pk 1 34}
 &{764 David Robinson david-robinson 1610612759 C 7-1 250 Navy USA 1987: Rd 1, Pk 1 50}
 ```
+
+### Player Game Logs
+Query game logs for a player
+
+#### Example 1: Fetch all game logs for Alperen Sengun against the San Antonio Spurs this season
+
+```
+q := query.PlayerGameLogs(playerID).
+  OpponentTeamID(1610612759)
+
+_ := q.Execute()
+gameLogs := q.GetGameLogs()
+```
+
+Output
+```
+&{1630578 0022300891 HOU vs. SAS 37 19 32 2 3 5 0 6 10 3 2 5 1 3 45 18 84}
+&{1630578 0022300298 HOU vs. SAS 30 6 12 1 1 2 0 2 7 4 6 2 1 3 15 10 34}
+&{1630578 0022300083 HOU @ SAS 41 11 18 1 3 2 0 6 8 7 6 2 1 6 25 -4 55}
+```
+
+#### Example 2: Fetch last 10 game logs for Alperen Sengun
+
+```
+q := query.PlayerGameLogs(playerID).
+  LastNGames(10)
+
+_ := q.Execute()
+gameLogs := q.GetGameLogs()
+```
+
+Output
+```
+&{1630578 0022300897 HOU vs. LAC 42 10 19 0 0 3 0 6 13 14 3 2 0 4 23 2 69}
+&{1630578 0022300891 HOU vs. SAS 37 19 32 2 3 5 0 6 10 3 2 5 1 3 45 18 84}
+&{1630578 0022300870 HOU @ PHX 33 9 21 0 2 3 0 5 5 2 3 2 1 4 21 16 42}
+&{1630578 0022300854 HOU @ PHX 23 3 7 0 1 2 0 1 2 4 1 0 0 6 8 -17 16}
+&{1630578 0022300841 HOU @ OKC 36 8 13 0 1 7 0 3 8 6 5 2 2 2 23 -11 52}
+&{1630578 0022300822 HOU vs. OKC 29 6 12 1 3 6 0 5 7 2 6 1 1 4 19 -4 36}
+&{1630578 0022300806 HOU vs. PHX 35 6 15 0 1 5 0 6 6 4 2 0 1 4 17 6 38}
+&{1630578 0022300798 HOU @ NOP 27 6 9 1 1 7 0 2 7 2 3 1 0 3 20 -15 33}
+&{1630578 0022300783 HOU @ MEM 34 8 16 1 2 2 0 3 2 6 1 1 1 6 19 -6 39}
+&{1630578 0022300765 HOU vs. NYK 36 6 10 0 0 6 0 0 3 6 3 1 3 3 18 -6 39}
+```
