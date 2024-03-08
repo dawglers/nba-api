@@ -43,8 +43,10 @@ func NewPlayer(fieldNames []string, data []any) *Player {
 		case "HEIGHT":
 			player.Height = data[i].(string)
 		case "WEIGHT":
-			weight, _ := strconv.Atoi(data[i].(string))
-			player.Weight = weight
+			weight, err := strconv.Atoi(data[i].(string))
+			if err == nil {
+				player.Weight = weight
+			}
 		case "COUNTRY":
 			player.Country = data[i].(string)
 		case "COLLEGE":
