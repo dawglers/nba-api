@@ -12,6 +12,7 @@ const (
 	PlayerIndexPath    Path = "playerindex"
 	PlayerGameLogsPath Path = "playergamelogs"
 	ListPlayersPath    Path = "cumestatsplayerlist"
+	ListTeamsPath      Path = "cumestatsteamlist"
 )
 
 type Endpoint interface {
