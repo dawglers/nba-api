@@ -3,20 +3,23 @@ package query
 import (
 	"strings"
 
-	endpoint "github.com/ndesai96/nba-api/endpoints"
+	"github.com/ndesai96/nba-api/endpoint"
 	"github.com/ndesai96/nba-api/models/league"
 	"github.com/ndesai96/nba-api/models/player"
 )
 
 type listPlayersBuilder struct {
-	endpoint *endpoint.ListPlayers
+	endpoint endpoint.Endpoint
 	players  []player.Player
 }
 
 func ListPlayers() *listPlayersBuilder {
-	return &listPlayersBuilder{
-		endpoint: endpoint.NewListPlayers(),
+	listPlayersBuilder := &listPlayersBuilder{
+		endpoint: endpoint.New(endpoint.ListPlayers),
 	}
+	listPlayersBuilder.SetDefaultParams()
+
+	return listPlayersBuilder
 }
 
 func (l *listPlayersBuilder) LeagueID(leagueID league.ID) *listPlayersBuilder {
@@ -32,6 +35,12 @@ func (l *listPlayersBuilder) Season(season league.Season) *listPlayersBuilder {
 func (l *listPlayersBuilder) SeasonType(seasonType league.SeasonType) *listPlayersBuilder {
 	l.endpoint.SetSeasonType(seasonType)
 	return l
+}
+
+func (l *listPlayersBuilder) SetDefaultParams() {
+	l.endpoint.SetLeagueID(league.NBA)
+	l.endpoint.SetSeason(2024)
+	l.endpoint.SetSeasonType(league.RegularSeason)
 }
 
 func (l *listPlayersBuilder) Execute() error {

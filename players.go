@@ -1,20 +1,23 @@
 package query
 
 import (
-	endpoint "github.com/ndesai96/nba-api/endpoints"
+	"github.com/ndesai96/nba-api/endpoint"
 	"github.com/ndesai96/nba-api/models/league"
 	"github.com/ndesai96/nba-api/models/player"
 )
 
 type playersBuilder struct {
-	endpoint *endpoint.PlayerIndex
+	endpoint endpoint.Endpoint
 	players  []*player.Player
 }
 
 func Players() *playersBuilder {
-	return &playersBuilder{
-		endpoint: endpoint.NewPlayerIndex(),
+	playersBuilder := &playersBuilder{
+		endpoint: endpoint.New(endpoint.PlayerIndex),
 	}
+	playersBuilder.SetDefaultParams()
+
+	return playersBuilder
 }
 
 func (p *playersBuilder) TeamID(teamID int) *playersBuilder {
@@ -45,6 +48,13 @@ func (p *playersBuilder) OnlyAllStar(onlyAllStar bool) *playersBuilder {
 func (p *playersBuilder) OnlyActive(onlyActive bool) *playersBuilder {
 	p.endpoint.SetOnlyActive(onlyActive)
 	return p
+}
+
+func (p *playersBuilder) SetDefaultParams() {
+	p.endpoint.SetHistorical(true)
+	p.endpoint.SetLeagueID(league.NBA)
+	p.endpoint.SetSeason(2024)
+	p.endpoint.SetOnlyActive(true)
 }
 
 func (p *playersBuilder) Execute() error {

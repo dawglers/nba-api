@@ -11,14 +11,37 @@ import (
 
 const NBAStatsBaseURL = "https://stats.nba.com/stats/"
 
-type Base struct {
-	params  url.Values
-	results *Results
+type Endpoint interface {
+	ParamSetter
+
+	Request() error
+	GetResults() *Results
 }
 
-func (b *Base) Request(path Path) error {
+type base struct {
+	params  url.Values
+	results *Results
+	path    Path
+}
+
+func New(path Path) *base {
+	return &base{
+		params: url.Values{},
+		path:   path,
+	}
+}
+
+func (b *base) SetPath(path Path) {
+	b.path = path
+}
+
+func (b *base) Request() error {
+	if b.path == "" {
+		return fmt.Errorf("error: path must be defined")
+	}
+
 	// Build an HTTP url
-	requestURL := fmt.Sprint(NBAStatsBaseURL, path)
+	requestURL := fmt.Sprint(NBAStatsBaseURL, b.path)
 
 	url, err := url.Parse(requestURL)
 	if err != nil {
@@ -49,4 +72,8 @@ func (b *Base) Request(path Path) error {
 	b.results = &r
 
 	return nil
+}
+
+func (b *base) GetResults() *Results {
+	return b.results
 }

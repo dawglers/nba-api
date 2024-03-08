@@ -71,7 +71,9 @@ func NewPlayer(fieldNames []string, data []any) *Player {
 				player.Weight = weight
 			}
 		case "COUNTRY":
-			player.Country = data[i].(string)
+			if country, ok := data[i].(string); ok {
+				player.Country = country
+			}
 		case "COLLEGE":
 			player.College = data[i].(string)
 		case "DRAFT_YEAR":

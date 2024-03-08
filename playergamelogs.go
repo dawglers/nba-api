@@ -1,20 +1,25 @@
 package query
 
 import (
-	endpoint "github.com/ndesai96/nba-api/endpoints"
+	"github.com/ndesai96/nba-api/endpoint"
 	"github.com/ndesai96/nba-api/models/league"
 	"github.com/ndesai96/nba-api/models/player"
 )
 
 type playerGameLogsBuilder struct {
-	endpoint *endpoint.PlayerGameLogs
+	endpoint endpoint.Endpoint
+	playerID int
 	gameLogs []*player.GameLog
 }
 
 func PlayerGameLogs(playerID int) *playerGameLogsBuilder {
-	return &playerGameLogsBuilder{
-		endpoint: endpoint.NewPlayerGameLogs(playerID),
+	playerGameLogsBuilder := &playerGameLogsBuilder{
+		endpoint: endpoint.New(endpoint.PlayerGameLogs),
+		playerID: playerID,
 	}
+	playerGameLogsBuilder.SetDefaultParams()
+
+	return playerGameLogsBuilder
 }
 
 func (p *playerGameLogsBuilder) LastNGames(lastNGames int) *playerGameLogsBuilder {
@@ -30,6 +35,11 @@ func (p *playerGameLogsBuilder) OpponentTeamID(opponentTeamID int) *playerGameLo
 func (p *playerGameLogsBuilder) Season(season league.Season) *playerGameLogsBuilder {
 	p.endpoint.SetSeason(season)
 	return p
+}
+
+func (p *playerGameLogsBuilder) SetDefaultParams() {
+	p.endpoint.SetPlayerID(p.playerID)
+	p.endpoint.SetSeason(2024)
 }
 
 func (p *playerGameLogsBuilder) Execute() error {
