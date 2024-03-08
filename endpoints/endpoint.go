@@ -11,6 +11,7 @@ const (
 	UndefinedPath           = ""
 	PlayerIndexPath    Path = "playerindex"
 	PlayerGameLogsPath Path = "playergamelogs"
+	ListPlayersPath    Path = "cumestatsplayerlist"
 )
 
 type Endpoint interface {

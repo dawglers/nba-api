@@ -19,6 +19,29 @@ type Player struct {
 	Jersey    string
 }
 
+type PlayerBuilder struct {
+	player Player
+}
+
+func (p *PlayerBuilder) Build() Player {
+	return p.player
+}
+
+func (p *PlayerBuilder) FirstName(firstName string) *PlayerBuilder {
+	p.player.FirstName = firstName
+	return p
+}
+
+func (p *PlayerBuilder) LastName(lastName string) *PlayerBuilder {
+	p.player.LastName = lastName
+	return p
+}
+
+func (p *PlayerBuilder) ID(id int) *PlayerBuilder {
+	p.player.ID = id
+	return p
+}
+
 func NewPlayer(fieldNames []string, data []any) *Player {
 	player := &Player{}
 
