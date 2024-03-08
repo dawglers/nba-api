@@ -14,6 +14,7 @@ const dateLayout = "2006-01-02T15:04:05"
 type GameLog struct {
 	PlayerID              int
 	GameID                int
+	TeamID                int
 	Matchup               string
 	GameDate              time.Time
 	Minutes               int
@@ -60,6 +61,8 @@ func NewGameLog(fieldNames []string, data []any) *GameLog {
 			if err == nil {
 				gameLog.GameID = gameID
 			}
+		case "TEAM_ID":
+			gameLog.TeamID = int(data[i].(float64))
 		case "GAME_DATE":
 			dateString := data[i].(string)
 			gameDate, err := time.Parse(dateLayout, dateString)
