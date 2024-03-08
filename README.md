@@ -8,7 +8,7 @@ Query all players
 #### Example 1: Fetch all WNBA Guards playing for the Las Vegas Aces
 
 ```
-p := query.Players().
+p := Players().
   LeagueID(league.WNBA).
   TeamID(1611661319).
   Position(player.Guard)
@@ -29,7 +29,7 @@ Output
 #### Example 2: Fetch all NBA Centers who were All Stars in the 1995-96 season
 
 ```
-p := query.Players().
+p := Players().
   OnlyAllStar(true).
   Position(player.Center).
   Season(1996)
@@ -54,7 +54,7 @@ Query game logs for a player
 #### Example 1: Fetch all game logs for Alperen Sengun against the San Antonio Spurs in the 2023 season
 
 ```
-q := query.PlayerGameLogs(1630578).
+q := PlayerGameLogs(1630578).
   OpponentTeamID(1610612759).
   Season(2023)
 
@@ -74,7 +74,7 @@ Output
 #### Example 2: Fetch last 10 game logs for Alperen Sengun
 
 ```
-q := query.PlayerGameLogs(1630578).
+q := PlayerGameLogs(1630578).
   LastNGames(10)
 
 _ := q.Execute()
