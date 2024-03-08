@@ -3,6 +3,7 @@ package player
 import (
 	"math"
 	"regexp"
+	"strconv"
 	"time"
 
 	"github.com/ndesai96/nba-api/models/game"
@@ -12,7 +13,7 @@ const dateLayout = "2006-01-02T15:04:05"
 
 type GameLog struct {
 	PlayerID              int
-	GameID                string
+	GameID                int
 	Matchup               string
 	GameDate              time.Time
 	Minutes               int
@@ -55,7 +56,10 @@ func NewGameLog(fieldNames []string, data []any) *GameLog {
 		case "PLAYER_ID":
 			gameLog.PlayerID = int(data[i].(float64))
 		case "GAME_ID":
-			gameLog.GameID = data[i].(string)
+			gameID, err := strconv.Atoi(data[i].(string))
+			if err == nil {
+				gameLog.GameID = gameID
+			}
 		case "GAME_DATE":
 			dateString := data[i].(string)
 			gameDate, err := time.Parse(dateLayout, dateString)
