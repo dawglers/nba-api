@@ -1,6 +1,8 @@
 package query
 
 import (
+	"strconv"
+
 	"github.com/ndesai96/nba-api/endpoint"
 	"github.com/ndesai96/nba-api/models/league"
 	"github.com/ndesai96/nba-api/models/player"
@@ -8,7 +10,7 @@ import (
 
 type playersBuilder struct {
 	endpoint endpoint.Endpoint
-	players  []*player.Player
+	players  []player.Player
 }
 
 func Players() *playersBuilder {
@@ -67,13 +69,65 @@ func (p *playersBuilder) Execute() error {
 	fieldNames := data.Headers
 
 	for _, playerData := range data.RowSet {
-		player := player.NewPlayer(fieldNames, playerData)
-		p.players = append(p.players, player)
+		playerBuilder := &player.PlayerBuilder{}
+		draftInfoBuidler := &player.DraftInfoBuilder{}
+
+		for i, fieldName := range fieldNames {
+			switch fieldName {
+			case "PERSON_ID":
+				playerBuilder.ID(int(playerData[i].(float64)))
+			case "PLAYER_LAST_NAME":
+				playerBuilder.LastName(playerData[i].(string))
+			case "PLAYER_FIRST_NAME":
+				playerBuilder.LastName(playerData[i].(string))
+			case "PLAYER_SLUG":
+				playerBuilder.LastName(playerData[i].(string))
+			case "JERSEY_NUMBER":
+				if jersey, ok := playerData[i].(string); ok {
+					playerBuilder.Jersey(jersey)
+				}
+			case "POSITION":
+				position := player.ToPosition(playerData[i].(string))
+				playerBuilder.Position(position)
+			case "HEIGHT":
+				if height, ok := playerData[i].(string); ok {
+					playerBuilder.Height(height)
+				}
+			case "WEIGHT":
+				weight, err := strconv.Atoi(playerData[i].(string))
+				if err == nil {
+					playerBuilder.Weight(weight)
+				}
+			case "COUNTRY":
+				if country, ok := playerData[i].(string); ok {
+					playerBuilder.Country(country)
+				}
+			case "COLLEGE":
+				if college, ok := playerData[i].(string); ok {
+					playerBuilder.College(college)
+				}
+			case "DRAFT_YEAR":
+				if draftYear, ok := playerData[i].(float64); ok {
+					draftInfoBuidler.Year(int(draftYear))
+				}
+			case "DRAFT_ROUND":
+				if draftRound, ok := playerData[i].(float64); ok {
+					draftInfoBuidler.Round(int(draftRound))
+				}
+			case "DRAFT_NUMBER":
+				if draftPick, ok := playerData[i].(float64); ok {
+					draftInfoBuidler.Pick(int(draftPick))
+				}
+			}
+		}
+
+		playerBuilder.DraftInfo(draftInfoBuidler.Build())
+		p.players = append(p.players, playerBuilder.Build())
 	}
 
 	return nil
 }
 
-func (p *playersBuilder) GetPlayers() []*player.Player {
+func (p *playersBuilder) GetPlayers() []player.Player {
 	return p.players
 }

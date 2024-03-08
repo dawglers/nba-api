@@ -3,13 +3,14 @@ package player
 type Position string
 
 const (
-	AllPositions Position = ""
-	Forward      Position = "F"
-	Center       Position = "C"
-	Guard        Position = "G"
+	AllPositions    Position = ""
+	UnknownPosition Position = ""
+	Forward         Position = "F"
+	Center          Position = "C"
+	Guard           Position = "G"
 )
 
-func StringToPosition(s string) Position {
+func ToPosition(s string) Position {
 	switch s {
 	case "F":
 		return Forward
@@ -18,6 +19,6 @@ func StringToPosition(s string) Position {
 	case "G":
 		return Guard
 	default:
-		return AllPositions
+		return UnknownPosition
 	}
 }

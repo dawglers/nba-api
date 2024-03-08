@@ -1,15 +1,10 @@
 package player
 
-import (
-	"strconv"
-)
-
 type Player struct {
 	ID        int
 	FirstName string
 	LastName  string
 	Slug      string
-	TeamID    int
 	Position  Position
 	Height    string
 	Weight    int
@@ -27,6 +22,11 @@ func (p *PlayerBuilder) Build() Player {
 	return p.player
 }
 
+func (p *PlayerBuilder) ID(id int) *PlayerBuilder {
+	p.player.ID = id
+	return p
+}
+
 func (p *PlayerBuilder) FirstName(firstName string) *PlayerBuilder {
 	p.player.FirstName = firstName
 	return p
@@ -37,66 +37,42 @@ func (p *PlayerBuilder) LastName(lastName string) *PlayerBuilder {
 	return p
 }
 
-func (p *PlayerBuilder) ID(id int) *PlayerBuilder {
-	p.player.ID = id
+func (p *PlayerBuilder) Slug(slug string) *PlayerBuilder {
+	p.player.Slug = slug
 	return p
 }
 
-func NewPlayer(fieldNames []string, data []any) *Player {
-	player := &Player{}
+func (p *PlayerBuilder) Jersey(jersey string) *PlayerBuilder {
+	p.player.Jersey = jersey
+	return p
+}
 
-	for i, fieldName := range fieldNames {
-		switch fieldName {
-		case "PERSON_ID":
-			player.ID = int(data[i].(float64))
-		case "PLAYER_LAST_NAME":
-			player.LastName = data[i].(string)
-		case "PLAYER_FIRST_NAME":
-			player.FirstName = data[i].(string)
-		case "PLAYER_SLUG":
-			player.Slug = data[i].(string)
-		case "TEAM_ID":
-			player.TeamID = int(data[i].(float64))
-		case "JERSEY_NUMBER":
-			if jersey, ok := data[i].(string); ok {
-				player.Jersey = jersey
-			}
-		case "POSITION":
-			player.Position = StringToPosition(data[i].(string))
-		case "HEIGHT":
-			player.Height = data[i].(string)
-		case "WEIGHT":
-			weight, err := strconv.Atoi(data[i].(string))
-			if err == nil {
-				player.Weight = weight
-			}
-		case "COUNTRY":
-			if country, ok := data[i].(string); ok {
-				player.Country = country
-			}
-		case "COLLEGE":
-			player.College = data[i].(string)
-		case "DRAFT_YEAR":
-			if draftYear, ok := data[i].(float64); ok {
-				player.DraftInfo.Year = int(draftYear)
-			} else {
-				player.DraftInfo.Undrafted = true
-			}
-		case "DRAFT_ROUND":
-			if draftRound, ok := data[i].(float64); ok {
-				player.DraftInfo.Round = int(draftRound)
-			} else {
-				player.DraftInfo.Undrafted = true
-			}
-		case "DRAFT_NUMBER":
-			if draftNumber, ok := data[i].(float64); ok {
-				player.DraftInfo.Pick = int(draftNumber)
-			} else {
-				player.DraftInfo.Undrafted = true
-			}
-		}
+func (p *PlayerBuilder) Position(position Position) *PlayerBuilder {
+	p.player.Position = position
+	return p
+}
 
-	}
+func (p *PlayerBuilder) Height(height string) *PlayerBuilder {
+	p.player.Height = height
+	return p
+}
 
-	return player
+func (p *PlayerBuilder) Weight(weight int) *PlayerBuilder {
+	p.player.Weight = weight
+	return p
+}
+
+func (p *PlayerBuilder) Country(country string) *PlayerBuilder {
+	p.player.Country = country
+	return p
+}
+
+func (p *PlayerBuilder) College(college string) *PlayerBuilder {
+	p.player.College = college
+	return p
+}
+
+func (p *PlayerBuilder) DraftInfo(draftInfo DraftInfo) *PlayerBuilder {
+	p.player.DraftInfo = draftInfo
+	return p
 }
