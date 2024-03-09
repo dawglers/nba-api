@@ -1,4 +1,4 @@
-package query
+package nba
 
 import (
 	"github.com/dawglers/nba-api/endpoint"
