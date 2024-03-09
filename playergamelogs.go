@@ -1,9 +1,9 @@
 package query
 
 import (
-	"github.com/ndesai96/nba-api/endpoint"
-	"github.com/ndesai96/nba-api/models/league"
-	"github.com/ndesai96/nba-api/models/player"
+	"github.com/dawglers/nba-api/endpoint"
+	"github.com/dawglers/nba-api/models/league"
+	"github.com/dawglers/nba-api/models/player"
 )
 
 type playerGameLogsBuilder struct {

@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"net/url"
 
-	"github.com/ndesai96/nba-api/http"
+	"github.com/dawglers/nba-api/http"
 )
 
 const NBAStatsBaseURL = "https://stats.nba.com/stats/"

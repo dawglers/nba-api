@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/ndesai96/nba-api/models/game"
+	"github.com/dawglers/nba-api/models/game"
 )
 
 const dateLayout = "2006-01-02T15:04:05"

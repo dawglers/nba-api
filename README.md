@@ -8,7 +8,7 @@ Query all players
 #### Example 1: Fetch all WNBA Guards playing for the Las Vegas Aces
 
 ```
-import nba "github.com/ndesai96/nba-api"
+import nba "github.com/dawglers/nba-api"
 
 p := nba.Players().
   LeagueID(league.WNBA).
@@ -31,7 +31,7 @@ Output
 #### Example 2: Fetch all NBA Centers who were All Stars in the 1995-96 season
 
 ```
-import nba "github.com/ndesai96/nba-api"
+import nba "github.com/dawglers/nba-api"
 
 p := nba.Players().
   OnlyAllStar(true).
@@ -58,7 +58,7 @@ Query game logs for a player
 #### Example 1: Fetch all game logs for Alperen Sengun against the San Antonio Spurs in the 2023 season
 
 ```
-import nba "github.com/ndesai96/nba-api"
+import nba "github.com/dawglers/nba-api"
 
 p := nba.PlayerGameLogs(1630578).
   OpponentTeamID(1610612759).
@@ -79,7 +79,7 @@ Output
 #### Example 2: Fetch last 10 game logs for Alperen Sengun
 
 ```
-import nba "github.com/ndesai96/nba-api"
+import nba "github.com/dawglers/nba-api"
 
 p := nba.PlayerGameLogs(1630578).
   LastNGames(10)

@@ -1,3 +1,3 @@
-module github.com/ndesai96/nba-api
+module github.com/dawglers/nba-api
 
 go 1.18
