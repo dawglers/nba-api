@@ -8,45 +8,45 @@ import (
 	"github.com/dawglers/nba-api/models/team"
 )
 
-type teamsBuilder struct {
+type teamInfoBuilder struct {
 	endpoint endpoint.Endpoint
 	teamID   int
 	team     team.Team
 }
 
-func TeamInfo(teamID int) *teamsBuilder {
-	teamsBuilder := &teamsBuilder{
+func TeamInfo(teamID int) *teamInfoBuilder {
+	teamInfoBuilder := &teamInfoBuilder{
 		endpoint: endpoint.New(endpoint.TeamInfoCommon),
 		teamID:   teamID,
 	}
-	teamsBuilder.SetDefaultParams()
+	teamInfoBuilder.SetDefaultParams()
 
-	return teamsBuilder
+	return teamInfoBuilder
 }
 
-func (t *teamsBuilder) LeagueID(leagueID league.ID) *teamsBuilder {
+func (t *teamInfoBuilder) LeagueID(leagueID league.ID) *teamInfoBuilder {
 	t.endpoint.SetLeagueID(leagueID)
 	return t
 }
 
-func (t *teamsBuilder) Season(season league.Season) *teamsBuilder {
+func (t *teamInfoBuilder) Season(season league.Season) *teamInfoBuilder {
 	t.endpoint.SetSeason(season)
 	return t
 }
 
-func (t *teamsBuilder) SeasonType(seasonType league.SeasonType) *teamsBuilder {
+func (t *teamInfoBuilder) SeasonType(seasonType league.SeasonType) *teamInfoBuilder {
 	t.endpoint.SetSeasonType(seasonType)
 	return t
 }
 
-func (t *teamsBuilder) SetDefaultParams() {
+func (t *teamInfoBuilder) SetDefaultParams() {
 	t.endpoint.SetTeamID(t.teamID)
 	t.endpoint.SetLeagueID(league.NBA)
 	t.endpoint.SetSeason(2024)
 	t.endpoint.SetSeasonType(league.RegularSeason)
 }
 
-func (t *teamsBuilder) Execute() error {
+func (t *teamInfoBuilder) Execute() error {
 	err := t.endpoint.Request()
 	if err != nil {
 		return err
@@ -95,6 +95,6 @@ func (t *teamsBuilder) Execute() error {
 	return nil
 }
 
-func (t *teamsBuilder) GetTeam() team.Team {
+func (t *teamInfoBuilder) GetTeam() team.Team {
 	return t.team
 }
