@@ -3,10 +3,10 @@ package endpoint
 type Path string
 
 const (
-	PlayerIndex    Path = "playerindex"
-	TeamInfoCommon Path = "teaminfocommon"
+	PlayerIndex       Path = "playerindex"
+	TeamInfoCommon    Path = "teaminfocommon"
+	CumeStatsTeamList Path = "cumestatsteamlist"
 
 	PlayerGameLogs Path = "playergamelogs"
-	ListTeams      Path = "cumestatsteamlist"
 	ListPlayers    Path = "cumestatsplayerlist"
 )

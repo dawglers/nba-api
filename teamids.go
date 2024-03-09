@@ -12,7 +12,7 @@ type teamsBuilder struct {
 
 func Teams() *teamsBuilder {
 	teamsBuilder := &teamsBuilder{
-		endpoint: endpoint.New(endpoint.ListTeams),
+		endpoint: endpoint.New(endpoint.CumeStatsTeamList),
 	}
 	teamsBuilder.SetDefaultParams()
 
