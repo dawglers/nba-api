@@ -62,6 +62,7 @@ func (p *playersBuilder) SetDefaultParams() {
 }
 
 func (p *playersBuilder) Execute() error {
+	// If TeamID is set and Historical is true then the API throws a 500
 	if p.teamID != 0 {
 		p.endpoint.SetHistorical(false)
 	}
