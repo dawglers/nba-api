@@ -2,6 +2,7 @@ package endpoint
 
 import (
 	"strconv"
+	"time"
 
 	"github.com/dawglers/nba-api/models/league"
 	"github.com/dawglers/nba-api/models/player"
@@ -19,6 +20,8 @@ type ParamSetter interface {
 	SetOnlyActive(onlyActive bool)
 	SetLastNGames(lastNGames int)
 	SetOpponentTeamID(opponentTeamID int)
+	SetDayOffset(dayOffset int)
+	SetGameDate(gameDate time.Time)
 }
 
 func (b *base) SetPlayerID(playerID int) {
@@ -63,6 +66,14 @@ func (b *base) SetLastNGames(lastNGames int) {
 
 func (b *base) SetOpponentTeamID(opponentTeamID int) {
 	b.params.Set("OpponentTeamID", strconv.Itoa(opponentTeamID))
+}
+
+func (b *base) SetDayOffset(dayOffset int) {
+	b.params.Set("DayOffset", strconv.Itoa(dayOffset))
+}
+
+func (b *base) SetGameDate(gameDate time.Time) {
+	b.params.Set("GameDate", gameDate.Format("2006-01-02"))
 }
 
 func boolToInt(b bool) int {
