@@ -11,6 +11,7 @@ import (
 type playersBuilder struct {
 	endpoint endpoint.Endpoint
 	players  []player.Player
+	teamID   int
 }
 
 func Players() *playersBuilder {
@@ -23,6 +24,7 @@ func Players() *playersBuilder {
 }
 
 func (p *playersBuilder) TeamID(teamID int) *playersBuilder {
+	p.teamID = teamID
 	p.endpoint.SetTeamID(teamID)
 	return p
 }
@@ -60,6 +62,10 @@ func (p *playersBuilder) SetDefaultParams() {
 }
 
 func (p *playersBuilder) Execute() error {
+	if p.teamID != 0 {
+		p.endpoint.SetHistorical(false)
+	}
+
 	err := p.endpoint.Request()
 	if err != nil {
 		return err
@@ -87,16 +93,20 @@ func (p *playersBuilder) Execute() error {
 					playerBuilder.Jersey(jersey)
 				}
 			case "POSITION":
-				position := player.ToPosition(playerData[i].(string))
-				playerBuilder.Position(position)
+				if positionString, ok := playerData[i].(string); ok {
+					position := player.ToPosition(positionString)
+					playerBuilder.Position(position)
+				}
 			case "HEIGHT":
 				if height, ok := playerData[i].(string); ok {
 					playerBuilder.Height(height)
 				}
 			case "WEIGHT":
-				weight, err := strconv.Atoi(playerData[i].(string))
-				if err == nil {
-					playerBuilder.Weight(weight)
+				if weightString, ok := playerData[i].(string); ok {
+					weight, err := strconv.Atoi(weightString)
+					if err == nil {
+						playerBuilder.Weight(weight)
+					}
 				}
 			case "COUNTRY":
 				if country, ok := playerData[i].(string); ok {
