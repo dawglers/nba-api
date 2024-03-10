@@ -10,5 +10,4 @@ const (
 	Scoreboard         Path = "scoreboardv2"
 
 	PlayerGameLogs Path = "playergamelogs"
-	ListPlayers    Path = "cumestatsplayerlist"
 )
