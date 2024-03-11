@@ -86,9 +86,9 @@ func (p *playersBuilder) Execute() error {
 			case "PLAYER_LAST_NAME":
 				playerBuilder.LastName(playerData[i].(string))
 			case "PLAYER_FIRST_NAME":
-				playerBuilder.LastName(playerData[i].(string))
+				playerBuilder.FirstName(playerData[i].(string))
 			case "PLAYER_SLUG":
-				playerBuilder.LastName(playerData[i].(string))
+				playerBuilder.Slug(playerData[i].(string))
 			case "JERSEY_NUMBER":
 				if jersey, ok := playerData[i].(string); ok {
 					playerBuilder.Jersey(jersey)
